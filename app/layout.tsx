@@ -1,6 +1,24 @@
 import type { Metadata } from "next";
+import { Roboto, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v16-appRouter';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import theme from './theme';
+
+// Font variables are read by the MUI theme (app/theme.ts).
+const roboto = Roboto({
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto",
+});
+const barlow = Barlow_Condensed({
+  weight: ["500", "600"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-barlow",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -9,10 +27,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${roboto.variable} ${barlow.variable}`}>
       <body>
-        <AppRouterCacheProvider>
-          {children}
+        <AppRouterCacheProvider options={{ enableCssLayer: true }}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            {children}
+          </ThemeProvider>
         </AppRouterCacheProvider>
       </body>
     </html>

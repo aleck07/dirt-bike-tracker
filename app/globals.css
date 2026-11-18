@@ -1,1 +1,13 @@
+/* MUI styles sit in the "mui" layer, so Tailwind utilities can still override them. */
+@layer theme, base, mui, components, utilities;
 @import "tailwindcss";
+
+@theme {
+  --color-dark: #14110f;
+  --color-light: #f7f4ef;
+  --color-primary: #c2410c;
+  --color-secondary: #2f5d62;
+  --color-success: #2e7d32;
+  --color-warning: #f2b705;
+  --color-danger: #9f1239;
+}
