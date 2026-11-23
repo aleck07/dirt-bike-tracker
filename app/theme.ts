@@ -29,11 +29,9 @@ const theme = createTheme({
   // Exposes colors as CSS variables (e.g. --mui-palette-primary-main),
   // which makes per-bike brand colors easy to add later.
   cssVariables: true,
-  spacing: 8,
   shape: { borderRadius: 8 },
 
   palette: {
-    mode: 'light',
     primary: { main: tokens.primary, dark: '#9a3412', light: '#fdebdd', contrastText: '#ffffff' },
     secondary: { main: tokens.secondary, contrastText: '#ffffff' },
     success: { main: tokens.success, dark: '#1b5e20', contrastText: '#ffffff' },
@@ -51,8 +49,6 @@ const theme = createTheme({
     h1: { fontFamily: display, fontWeight: 600, fontSize: '2.75rem', lineHeight: 1.1, letterSpacing: '0.01em' },
     h2: { fontWeight: 500, fontSize: '1.25rem', lineHeight: 1.3 }, // section headings
     h3: { fontWeight: 500, fontSize: '1.125rem', lineHeight: 1.3 }, // card titles
-    body1: { fontSize: '1rem' },
-    body2: { fontSize: '0.875rem' },
     button: { fontWeight: 500, fontSize: '0.875rem', textTransform: 'none' },
     overline: { fontWeight: 500, fontSize: '0.75rem', letterSpacing: '0.08em', lineHeight: 1.5 },
     // Big numbers on stat cards and the cost-per-ride tiles
@@ -60,14 +56,10 @@ const theme = createTheme({
   },
 
   components: {
-    MuiCssBaseline: {
-      styleOverrides: { body: { backgroundColor: tokens.light, color: tokens.dark } },
-    },
-
     MuiButton: {
       defaultProps: { disableElevation: true },
       styleOverrides: {
-        root: { borderRadius: 8, minHeight: 44, paddingInline: 20 },
+        root: { minHeight: 44, paddingInline: 20 },
         sizeSmall: { minHeight: 36, paddingInline: 14 },
         sizeLarge: { minHeight: 52, fontSize: '1rem' },
         outlined: { borderColor: '#cfc8be', backgroundColor: '#fff' },
@@ -92,8 +84,6 @@ const theme = createTheme({
         { props: { color: 'success', variant: 'filled' }, style: { backgroundColor: statusTones.success.bg, color: statusTones.success.fg } },
         { props: { color: 'warning', variant: 'filled' }, style: { backgroundColor: statusTones.warning.bg, color: statusTones.warning.fg } },
         { props: { color: 'error', variant: 'filled' }, style: { backgroundColor: statusTones.error.bg, color: statusTones.error.fg } },
-        // Condition chips on Log ride (Sand, Mud...): any clickable medium chip gets the 44px touch height.
-        { props: { size: 'medium', clickable: true }, style: { height: 44, borderRadius: 22, fontSize: '0.875rem', paddingInline: 4 } },
       ],
     },
 
@@ -109,7 +99,6 @@ const theme = createTheme({
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
-          borderRadius: 8,
           backgroundColor: tokens.light,
           '& .MuiOutlinedInput-notchedOutline': { borderColor: tokens.inputBorder },
           '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: tokens.dark },
@@ -117,41 +106,6 @@ const theme = createTheme({
       },
     },
 
-    // Dark sidebar and its nav items
-    MuiDrawer: {
-      styleOverrides: {
-        paper: { backgroundColor: tokens.dark, color: tokens.light, borderRight: 0 },
-      },
-    },
-    MuiAppBar: {
-      defaultProps: { elevation: 0, color: 'inherit' },
-      styleOverrides: { root: { backgroundColor: tokens.dark, color: tokens.light } },
-    },
-    MuiListItemButton: {
-      styleOverrides: {
-        root: {
-          minHeight: 44,
-          borderRadius: 8,
-          color: '#d6d2cb',
-          '& .MuiListItemIcon-root': { color: 'inherit', minWidth: 32 },
-          '&.Mui-selected, &.Mui-selected:hover': {
-            backgroundColor: tokens.navActiveBg,
-            color: tokens.navActiveText,
-          },
-        },
-      },
-    },
-
-    MuiToggleButton: {
-      styleOverrides: {
-        root: {
-          textTransform: 'none',
-          fontWeight: 500,
-          minHeight: 48,
-          '&.Mui-selected, &.Mui-selected:hover': { backgroundColor: tokens.secondary, color: '#fff' },
-        },
-      },
-    },
   },
 });
 
