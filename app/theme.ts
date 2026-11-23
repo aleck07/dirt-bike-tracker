@@ -50,12 +50,18 @@ const theme = createTheme({
     h2: { fontWeight: 500, fontSize: '1.25rem', lineHeight: 1.3 }, // section headings
     h3: { fontWeight: 500, fontSize: '1.125rem', lineHeight: 1.3 }, // card titles
     button: { fontWeight: 500, fontSize: '0.875rem', textTransform: 'none' },
-    overline: { fontWeight: 500, fontSize: '0.75rem', letterSpacing: '0.08em', lineHeight: 1.5 },
+    // Stat card labels and table headers
+    overline: { fontWeight: 500, fontSize: '0.75rem', letterSpacing: '0.08em', lineHeight: 1.5, color: tokens.muted },
     // Big numbers on stat cards and the cost-per-ride tiles
     stat: { fontFamily: display, fontWeight: 600, fontSize: '2.75rem', lineHeight: 1.1 },
   },
 
   components: {
+    // Custom variants render as <span> by default; make stat a block element
+    MuiTypography: {
+      defaultProps: { variantMapping: { stat: 'div' } },
+    },
+
     MuiButton: {
       defaultProps: { disableElevation: true },
       styleOverrides: {
@@ -84,6 +90,10 @@ const theme = createTheme({
         { props: { color: 'success', variant: 'filled' }, style: { backgroundColor: statusTones.success.bg, color: statusTones.success.fg } },
         { props: { color: 'warning', variant: 'filled' }, style: { backgroundColor: statusTones.warning.bg, color: statusTones.warning.fg } },
         { props: { color: 'error', variant: 'filled' }, style: { backgroundColor: statusTones.error.bg, color: statusTones.error.fg } },
+        // Filter pills (All, Needs attention, Engine...): <Chip clickable variant="filled|outlined" color="primary" />
+        { props: { clickable: true }, style: { height: 44, borderRadius: 22, fontSize: '0.875rem', paddingInline: 6 } },
+        { props: { clickable: true, variant: 'outlined' }, style: { borderColor: '#cfc8be', color: tokens.dark } },
+        { props: { clickable: true, variant: 'filled', color: 'primary' }, style: { backgroundColor: '#fdebdd', color: '#9a3412', '&:hover': { backgroundColor: '#fbd9c1' } } },
       ],
     },
 
@@ -92,6 +102,14 @@ const theme = createTheme({
       styleOverrides: {
         root: { height: 8, borderRadius: 4, backgroundColor: tokens.track },
         bar: { borderRadius: 4 },
+      },
+    },
+
+    // Tables: uppercase grey headers, light row borders
+    MuiTableCell: {
+      styleOverrides: {
+        root: { borderBottomColor: tokens.border, paddingBlock: 16 },
+        head: { fontWeight: 500, fontSize: '0.75rem', letterSpacing: '0.08em', textTransform: 'uppercase', color: tokens.muted },
       },
     },
 
@@ -106,6 +124,26 @@ const theme = createTheme({
       },
     },
 
+    // Dark sidebar and its nav items
+    MuiDrawer: {
+      styleOverrides: {
+        paper: { backgroundColor: tokens.dark, color: tokens.light, borderRight: 0 },
+      },
+    },
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          minHeight: 44,
+          borderRadius: 8,
+          color: '#d6d2cb',
+          '& .MuiListItemIcon-root': { color: 'inherit', minWidth: 32 },
+          '&.Mui-selected, &.Mui-selected:hover': {
+            backgroundColor: tokens.navActiveBg,
+            color: tokens.navActiveText,
+          },
+        },
+      },
+    },
   },
 });
 
